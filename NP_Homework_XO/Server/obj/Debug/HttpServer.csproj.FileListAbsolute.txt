@@ -1,0 +1,9 @@
+E:\workspace\NP\NP_Homework_XO\NP_Homework_XO\Server\obj\Debug\HttpServer.csprojResolveAssemblyReference.cache
+E:\workspace\NP\NP_Homework_XO\NP_Homework_XO\Server\obj\Debug\HttpServer.csproj.CoreCompileInputs.cache
+E:\workspace\NP\NP_Homework_XO\NP_Homework_XO\Server\bin\Debug\Server.exe.config
+E:\workspace\NP\NP_Homework_XO\NP_Homework_XO\Server\bin\Debug\Server.exe
+E:\workspace\NP\NP_Homework_XO\NP_Homework_XO\Server\bin\Debug\Server.pdb
+E:\workspace\NP\NP_Homework_XO\NP_Homework_XO\Server\obj\Debug\Server.exe
+E:\workspace\NP\NP_Homework_XO\NP_Homework_XO\Server\obj\Debug\Server.pdb
+E:\workspace\NP\NP_Homework_XO\NP_Homework_XO\Server\bin\Debug\ServerLib.dll
+E:\workspace\NP\NP_Homework_XO\NP_Homework_XO\Server\bin\Debug\ServerLib.pdb

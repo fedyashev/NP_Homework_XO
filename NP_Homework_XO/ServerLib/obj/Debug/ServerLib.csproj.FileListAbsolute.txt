@@ -1,0 +1,8 @@
+E:\workspace\NP\NP_Homework_XO\NP_Homework_XO\ServerLib\bin\Debug\ServerLib.dll
+E:\workspace\NP\NP_Homework_XO\NP_Homework_XO\ServerLib\bin\Debug\ServerLib.pdb
+E:\workspace\NP\NP_Homework_XO\NP_Homework_XO\ServerLib\bin\Debug\Newtonsoft.Json.dll
+E:\workspace\NP\NP_Homework_XO\NP_Homework_XO\ServerLib\bin\Debug\Newtonsoft.Json.xml
+E:\workspace\NP\NP_Homework_XO\NP_Homework_XO\ServerLib\obj\Debug\ServerLib.csprojResolveAssemblyReference.cache
+E:\workspace\NP\NP_Homework_XO\NP_Homework_XO\ServerLib\obj\Debug\ServerLib.csproj.CoreCompileInputs.cache
+E:\workspace\NP\NP_Homework_XO\NP_Homework_XO\ServerLib\obj\Debug\ServerLib.dll
+E:\workspace\NP\NP_Homework_XO\NP_Homework_XO\ServerLib\obj\Debug\ServerLib.pdb
