@@ -1,0 +1,4 @@
+C:\workspace\NP\GameXO\AppLib\bin\Debug\AppLib.dll
+C:\workspace\NP\GameXO\AppLib\bin\Debug\AppLib.pdb
+C:\workspace\NP\GameXO\AppLib\obj\Debug\AppLib.dll
+C:\workspace\NP\GameXO\AppLib\obj\Debug\AppLib.pdb

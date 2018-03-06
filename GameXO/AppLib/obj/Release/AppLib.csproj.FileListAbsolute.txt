@@ -1,0 +1,5 @@
+C:\workspace\NP\GameXO\AppLib\bin\Release\AppLib.dll
+C:\workspace\NP\GameXO\AppLib\bin\Release\AppLib.pdb
+C:\workspace\NP\GameXO\AppLib\obj\Release\AppLib.dll
+C:\workspace\NP\GameXO\AppLib\obj\Release\AppLib.pdb
+C:\workspace\NP\GameXO\AppLib\obj\Release\AppLib.csprojResolveAssemblyReference.cache

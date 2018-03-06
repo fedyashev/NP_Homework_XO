@@ -6,3 +6,6 @@ E:\workspace\NP\NP_Homework_XO\NP_Homework_XO\ServerLib\obj\Debug\ServerLib.cspr
 E:\workspace\NP\NP_Homework_XO\NP_Homework_XO\ServerLib\obj\Debug\ServerLib.csproj.CoreCompileInputs.cache
 E:\workspace\NP\NP_Homework_XO\NP_Homework_XO\ServerLib\obj\Debug\ServerLib.dll
 E:\workspace\NP\NP_Homework_XO\NP_Homework_XO\ServerLib\obj\Debug\ServerLib.pdb
+C:\workspace\NP\NP_Homework_XO\NP_Homework_XO\ServerLib\obj\Debug\ServerLib.csprojResolveAssemblyReference.cache
+C:\workspace\NP\NP_Homework_XO\NP_Homework_XO\ServerLib\obj\Debug\ServerLib.dll
+C:\workspace\NP\NP_Homework_XO\NP_Homework_XO\ServerLib\obj\Debug\ServerLib.pdb
