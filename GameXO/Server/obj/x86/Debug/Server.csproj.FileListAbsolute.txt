@@ -5,3 +5,13 @@ C:\workspace\NP\GameXO\Server\bin\Debug\AppLib.pdb
 C:\workspace\NP\GameXO\Server\obj\x86\Debug\Server.csprojResolveAssemblyReference.cache
 C:\workspace\NP\GameXO\Server\obj\x86\Debug\Server.exe
 C:\workspace\NP\GameXO\Server\obj\x86\Debug\Server.pdb
+e:\workspace\NP\NP_Homework_XO\GameXO\Server\bin\Debug\Server.exe
+e:\workspace\NP\NP_Homework_XO\GameXO\Server\bin\Debug\Server.pdb
+e:\workspace\NP\NP_Homework_XO\GameXO\Server\bin\Debug\AppLib.dll
+e:\workspace\NP\NP_Homework_XO\GameXO\Server\bin\Debug\Newtonsoft.Json.dll
+e:\workspace\NP\NP_Homework_XO\GameXO\Server\bin\Debug\AppLib.pdb
+e:\workspace\NP\NP_Homework_XO\GameXO\Server\bin\Debug\Newtonsoft.Json.xml
+e:\workspace\NP\NP_Homework_XO\GameXO\Server\obj\x86\Debug\Server.csprojResolveAssemblyReference.cache
+e:\workspace\NP\NP_Homework_XO\GameXO\Server\obj\x86\Debug\Server.csproj.CoreCompileInputs.cache
+e:\workspace\NP\NP_Homework_XO\GameXO\Server\obj\x86\Debug\Server.exe
+e:\workspace\NP\NP_Homework_XO\GameXO\Server\obj\x86\Debug\Server.pdb

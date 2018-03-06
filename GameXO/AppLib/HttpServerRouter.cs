@@ -6,6 +6,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using AppLib.Packets;
+using AppLib.Entity;
+using AppLib.Repository;
 
 namespace AppLib
 {
@@ -39,7 +42,7 @@ namespace AppLib
                 if (route != null)
                 {
                     route.Action(req, res, data, Regex.Matches(path, route.Pattern));
-                    Console.WriteLine("Route {0}", data.Data);
+                    //Console.WriteLine("Route {0}", data.Data);
                 }
                 else
                 {
@@ -72,10 +75,10 @@ namespace AppLib
             {
                 throw new ArgumentException();
             }
-            System.IO.Stream body = request.InputStream;
-            System.Text.Encoding encoding = request.ContentEncoding;
-            System.IO.StreamReader reader = new System.IO.StreamReader(body, encoding);
-            string content = reader.ReadToEnd();
+            var body = request.InputStream;
+            var encoding = request.ContentEncoding;
+            var reader = new System.IO.StreamReader(body, encoding);
+            var content = reader.ReadToEnd();
             body.Close();
             reader.Close();
             return content;
@@ -90,29 +93,73 @@ namespace AppLib
         private static void GameStateHandler(HttpListenerRequest req, HttpListenerResponse res, ResponseData data, MatchCollection matches)
         {
             var id = matches[0].Groups[1].Value;
-            data.Data = String.Format("Game state {0}", id);
+            var game = GameRepository
+                .GetGames()
+                .Find(p => id.Equals(String.Format("{0}", p.Id)));
+            if (game != null)
+            {
+                var packet = new GameStateResponsePacket(game);
+                data.Data = JsonConvert.SerializeObject(packet);
+            }
+            else
+            {
+                res.StatusCode = 400;
+            }
         }
 
         private static void GameCreateHandler(HttpListenerRequest req, HttpListenerResponse res, ResponseData data, MatchCollection matches)
         {
-            //var id = matches[0].Groups[1].Value;
-            //data.Data = String.Format("Game create {0}", id);
-
             var body = GetBody(req);
-            Console.WriteLine(body);
-            
-            data.Data = body;
+            var createGamePacket = JsonConvert.DeserializeObject<CreateGamePacket>(body);
+            if (createGamePacket != null)
+            {
+                var game = GameRepository.Create(createGamePacket.Name);
+                var successPacket = new CreateGameSuccessPacket(game.Id, game.Key);
+                data.Data = JsonConvert.SerializeObject(successPacket);
+            }
+            else
+            {
+                throw new Exception("Can't parse packet.");
+            }
+
         }
 
         private static void GameJoinHandler(HttpListenerRequest req, HttpListenerResponse res, ResponseData data, MatchCollection matches)
         {
             var id = matches[0].Groups[1].Value;
-            data.Data = String.Format("Game join {0}", id);
+            var body = GetBody(req);
+            var reqPacket = JsonConvert.DeserializeObject<JoinPacket>(body);
+            if (reqPacket != null)
+            {
+                var game = GameRepository.GetGames().Find(p => id.Equals(String.Format("{0}", p.Id)));
+                if (game != null && !game.Player1Name.Equals(reqPacket.Name))
+                {
+                    game.Join(reqPacket.Name);
+
+                    var resPacket = new JoinSuccessPacket(game.Key);
+                    data.Data = JsonConvert.SerializeObject(resPacket);
+                }
+                else
+                {
+                    res.StatusCode = 400;
+                }
+            }
+            else
+            {
+                res.StatusCode = 400;
+            }
         }
 
         private static void GameListenersHanlder(HttpListenerRequest req, HttpListenerResponse res, ResponseData data, MatchCollection matches)
         {
-        
+            var list = GameRepository
+                .GetGames()
+                .FindAll(game => game.isListen())
+                .Select(game => new PlayerInfo(game.Id, game.Player1Name))
+                .ToList();
+
+            var listenersPacket = new ListenersPacket(list);
+            data.Data = JsonConvert.SerializeObject(listenersPacket);
         }
     }
 }

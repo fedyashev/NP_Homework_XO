@@ -22,11 +22,19 @@ namespace AppLib.Repository
             return _games;
         }
 
-        public static void Add(GameInfo game)
+        //public static void Add(GameInfo game)
+        //{
+        //    game.Id = _counter;
+        //    _games.Add(game);
+        //    _counter++;
+        //}
+
+        public static GameInfo Create(string player1Name)
         {
-            game.Id = _counter;
+            var game = new GameInfo(player1Name) { Id = _counter};
             _games.Add(game);
             _counter++;
+            return game;
         }
     }
 }
