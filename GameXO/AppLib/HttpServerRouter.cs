@@ -87,7 +87,43 @@ namespace AppLib
         private static void GameActionHanlder(HttpListenerRequest req, HttpListenerResponse res, ResponseData data, MatchCollection matches)
         {
             var id = matches[0].Groups[1].Value;
-            data.Data = String.Format("Game action {0}", id);
+            var body = GetBody(req);
+            var game = GameRepository
+                .GetGames()
+                .Find(p => id.Equals(String.Format("{0}", p.Id)));
+            if (game != null)
+            {
+                var reqPacket = JsonConvert.DeserializeObject<ActionPacket>(body);
+                if (reqPacket != null)
+                {
+                    if (game.CompareKey(reqPacket.Key))
+                    {
+                        if (game.Action(reqPacket.Name, reqPacket.Row, reqPacket.Col))
+                        {
+                            var resPacket = new ActionSuccessPacket();
+                            data.Data = JsonConvert.SerializeObject(resPacket);
+                        }
+                        else
+                        {
+                            var resPacket = new ActionFailPacket("Action failed");
+                            data.Data = JsonConvert.SerializeObject(resPacket);                            
+                        }
+                    }
+                    else
+                    {
+                        var resPacket = new ActionFailPacket("Wrong key");
+                        data.Data = JsonConvert.SerializeObject(resPacket);
+                    }
+                }
+                else
+                {
+                    res.StatusCode = 400;
+                }
+            }
+            else
+            {
+                res.StatusCode = 404;
+            }
         }
 
         private static void GameStateHandler(HttpListenerRequest req, HttpListenerResponse res, ResponseData data, MatchCollection matches)
@@ -134,10 +170,16 @@ namespace AppLib
                 var game = GameRepository.GetGames().Find(p => id.Equals(String.Format("{0}", p.Id)));
                 if (game != null && !game.Player1Name.Equals(reqPacket.Name))
                 {
-                    game.Join(reqPacket.Name);
-
-                    var resPacket = new JoinSuccessPacket(game.Key);
-                    data.Data = JsonConvert.SerializeObject(resPacket);
+                    if (game.Join(reqPacket.Name))
+                    {
+                        var resPacket = new JoinSuccessPacket(game.Key);
+                        data.Data = JsonConvert.SerializeObject(resPacket);
+                    }
+                    else
+                    {
+                        var resPacket = new JoinFailPacket("Can't join to game.");
+                        data.Data = JsonConvert.SerializeObject(resPacket);
+                    }
                 }
                 else
                 {

@@ -46,11 +46,15 @@
     <Compile Include="Entity\GameInfo.cs" />
     <Compile Include="Entity\PlayerInfo.cs" />
     <Compile Include="HttpServerRouter.cs" />
+    <Compile Include="Packets\ActionFailPacket.cs" />
+    <Compile Include="Packets\ActionPacket.cs" />
+    <Compile Include="Packets\ActionSuccessPacket.cs" />
     <Compile Include="Packets\CreateGamePacket.cs" />
     <Compile Include="Packets\CreateGameSuccessPacket.cs" />
     <Compile Include="Packets\GameStateRequestPacket.cs" />
     <Compile Include="Packets\GameStateResponsePacket.cs" />
     <Compile Include="Packets\GetListenersPacket.cs" />
+    <Compile Include="Packets\JoinFailPacket.cs" />
     <Compile Include="Packets\JoinPacket.cs" />
     <Compile Include="Packets\JoinSuccessPacket.cs" />
     <Compile Include="Packets\ListenersPacket.cs" />

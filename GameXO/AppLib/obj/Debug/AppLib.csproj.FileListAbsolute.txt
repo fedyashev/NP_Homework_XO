@@ -10,3 +10,10 @@ e:\workspace\NP\NP_Homework_XO\GameXO\AppLib\obj\Debug\AppLib.csproj.CoreCompile
 e:\workspace\NP\NP_Homework_XO\GameXO\AppLib\obj\Debug\AppLib.dll
 e:\workspace\NP\NP_Homework_XO\GameXO\AppLib\obj\Debug\AppLib.pdb
 e:\workspace\NP\NP_Homework_XO\GameXO\AppLib\obj\Debug\AppLib.csprojResolveAssemblyReference.cache
+C:\workspace\NP\NP_Homework_XO\GameXO\AppLib\obj\Debug\AppLib.csprojResolveAssemblyReference.cache
+C:\workspace\NP\NP_Homework_XO\GameXO\AppLib\obj\Debug\AppLib.dll
+C:\workspace\NP\NP_Homework_XO\GameXO\AppLib\obj\Debug\AppLib.pdb
+C:\workspace\NP\NP_Homework_XO\GameXO\AppLib\bin\Debug\AppLib.dll
+C:\workspace\NP\NP_Homework_XO\GameXO\AppLib\bin\Debug\AppLib.pdb
+C:\workspace\NP\NP_Homework_XO\GameXO\AppLib\bin\Debug\Newtonsoft.Json.dll
+C:\workspace\NP\NP_Homework_XO\GameXO\AppLib\bin\Debug\Newtonsoft.Json.xml
