@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using AppLib.Packets;
 using AppLib.Entity;
 using AppLib.Repository;
+using System.IO;
 
 namespace AppLib
 {
@@ -25,6 +26,7 @@ namespace AppLib
                 new RouteHandler("GET", @"^/api/v1/game/([0-9]+)/state$", GameStateHandler),
                 new RouteHandler("POST", @"^/api/v1/game/([0-9]+)/action$", GameActionHanlder),
                 new RouteHandler("GET", @"^/api/v1/game/listeners$", GameListenersHanlder),
+                new RouteHandler("GET", @"^.*$", StaticHanlder),
             };
         }
 
@@ -202,6 +204,22 @@ namespace AppLib
 
             var listenersPacket = new ListenersPacket(list);
             data.Data = JsonConvert.SerializeObject(listenersPacket);
+        }
+
+        private static void StaticHanlder(HttpListenerRequest req, HttpListenerResponse res, ResponseData data, MatchCollection matches)
+        {
+            data.Data = "Static";
+            var path = matches[0].Groups[0].Value;
+            path = "../../../public/" + path.TrimStart('/');
+            Console.WriteLine(path);
+            if (File.Exists(path))
+            {
+                data.Data = File.ReadAllText(path, Encoding.UTF8);
+            }
+            else
+            {
+                res.StatusCode = 404;
+            }
         }
     }
 }
