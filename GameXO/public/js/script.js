@@ -34,13 +34,15 @@ window.onload = () => {
             console.log(err);
             return;
         }
-        game.Player1Name = packet.Player1Name;
-        game.Player2Name = packet.Player2Name;
-        game.State = packet.State;
-        game.Turn = packet.Turn;
-        game.Winner = packet.Winner;
-        game.Field = packet.Field;
-        RefreshGameField();
+        if (IsGameStateChanged(game, packet)) {
+            game.Player1Name = packet.Player1Name;
+            game.Player2Name = packet.Player2Name;
+            game.State = packet.State;
+            game.Turn = packet.Turn;
+            game.Winner = packet.Winner;
+            game.Field = packet.Field;
+            RefreshGameField();
+        }
         console.log(JSON.stringify(game));
     });
 };
@@ -60,7 +62,6 @@ function GetListeners(callback) {
 }
 
 function CreatePlayersList(players) {
-    //console.log(players);
     let ul = document.createElement("ul");
     ul.className = "list-group";
     players.forEach(player => {
@@ -156,7 +157,7 @@ function btnCreateGameOnclick() {
     .done((data) => {
         data = JSON.parse(data);
         if (data.Type === "CREATEGAMESUCCESS") {
-            game = new Game(data.Id, playerName, null, data.Key);
+            game = new Game(data.Id, playerName, "", data.Key);
             ShowGameField();
         }
     })
@@ -177,22 +178,31 @@ function CreateGameFieldCompanent(obj) {
     let gamePlayerX = document.createElement("span");
     gamePlayerX.className = "badge badge-primary mr-2";
     gamePlayerX.innerText = `Player X : ${obj.Player1Name}`;
+    gameFieldCompanent.appendChild(gamePlayerX);
 
     let gamePlayerO = document.createElement("span");
     gamePlayerO.className = "badge badge-danger mr-2";
     gamePlayerO.innerText = `Player O : ${obj.Player2Name}`;
+    gameFieldCompanent.appendChild(gamePlayerO);
 
     let gameState = document.createElement("span");
     gameState.className = "badge badge-warning mr-2";
     gameState.innerText = `Game state: ${obj.State}`;
+    gameFieldCompanent.appendChild(gameState);
 
-    let gameTurn = document.createElement("span");
-    gameTurn.className = "badge badge-warning mr-2";
-    gameTurn.innerText = `Turn: ${obj.Turn}`;
+    if (obj.Turn) {
+        let gameTurn = document.createElement("span");
+        gameTurn.className = `badge badge-${obj.Turn === obj.Player1Name ? "primary" : "danger"} mr-2`;
+        gameTurn.innerText = `Turn: ${obj.Turn}`;
+        gameFieldCompanent.appendChild(gameTurn);
+    }
 
-    let gameWinner = document.createElement("span");
-    gameWinner.className = "badge badge-warning";
-    gameWinner.innerText = `Winner: ${obj.Winner}`;
+    if (obj.Winner) {
+        let gameWinner = document.createElement("span");
+        gameWinner.className = "badge badge-success";
+        gameWinner.innerText = `Winner: ${obj.Winner}`;
+        gameFieldCompanent.appendChild(gameWinner);
+    }
 
     let gameField = document.createElement("table");
     gameField.className = "game-field align-self-center";
@@ -210,14 +220,7 @@ function CreateGameFieldCompanent(obj) {
         }
         gameField.appendChild(row);
     }
-
-    gameFieldCompanent.appendChild(gamePlayerX);
-    gameFieldCompanent.appendChild(gamePlayerO);
-    gameFieldCompanent.appendChild(gameState);
-    gameFieldCompanent.appendChild(gameTurn);
-    gameFieldCompanent.appendChild(gameWinner);
     gameFieldCompanent.appendChild(gameField);
-
     return gameFieldCompanent;
 }
 
@@ -290,4 +293,13 @@ function FieldCellOnclick() {
             console.log(err);
         });
     }
+}
+
+function IsGameStateChanged(gameObject, packet) {
+    if (gameObject.Player1Name !== packet.Player1Name) return true;
+    if (gameObject.Player2Name !== packet.Player2Name) return true;
+    if (gameObject.State !== packet.State) return true;
+    if (gameObject.Turn !== packet.Turn) return true;
+    if (gameObject.Winner !== packet.Winner) return true;
+    return false;
 }
