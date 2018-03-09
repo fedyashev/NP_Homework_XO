@@ -21,6 +21,7 @@ namespace AppLib
         {
             routes = new List<RouteHandler>()
             {
+                new RouteHandler("GET", @"^/$", IndexHandler),
                 new RouteHandler("POST", @"^/api/v1/game/create$", GameCreateHandler),
                 new RouteHandler("POST", @"^/api/v1/game/([0-9]+)/join", GameJoinHandler),
                 new RouteHandler("GET", @"^/api/v1/game/([0-9]+)/state$", GameStateHandler),
@@ -208,10 +209,23 @@ namespace AppLib
 
         private static void StaticHanlder(HttpListenerRequest req, HttpListenerResponse res, ResponseData data, MatchCollection matches)
         {
-            data.Data = "Static";
+            //data.Data = "Static";
             var path = matches[0].Groups[0].Value;
             path = "../../../public/" + path.TrimStart('/');
             Console.WriteLine(path);
+            if (File.Exists(path))
+            {
+                data.Data = File.ReadAllText(path, Encoding.UTF8);
+            }
+            else
+            {
+                res.StatusCode = 404;
+            }
+        }
+
+        private static void IndexHandler(HttpListenerRequest req, HttpListenerResponse res, ResponseData data, MatchCollection matches)
+        {
+            var path = "../../../public/index.html";
             if (File.Exists(path))
             {
                 data.Data = File.ReadAllText(path, Encoding.UTF8);

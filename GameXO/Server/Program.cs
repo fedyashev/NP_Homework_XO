@@ -10,7 +10,7 @@ namespace Server
     {
         static void Main(string[] args)
         {
-            var app = new WebServer(HttpServerRouter.Router, "http://localhost:8080/");
+            var app = new WebServer(HttpServerRouter.Router, "http://127.0.0.1:8080/");
             app.Run();
             Console.WriteLine("A simple webserver. Press a key to quit.");
             Console.ReadKey();

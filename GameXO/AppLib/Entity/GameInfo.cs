@@ -108,30 +108,32 @@ namespace AppLib.Entity
             var sign = Player1Name.Equals(playerName) ? CROSS : ROUND;
             Field[i, j] = sign;
 
-            if (!isDraw())
+            if (isWin(sign))
             {
-                if (isWin(sign))
+                State = "FINISH";
+                Turn = String.Empty;
+                Winner = sign == CROSS ? Player1Name : Player2Name;
+            }
+            else
+            {
+                if (isDraw())
                 {
-                    State = "FINISH";
-                    Winner = sign == CROSS ? Player1Name : Player2Name;
+                    State = "DRAW";
+                    Turn = String.Empty;
                 }
                 else
                 {
                     Turn = Turn.Equals(Player1Name) ? Player2Name : Player1Name;
                 }
             }
-            else
-            {
-                State = "DRAW";
-            }
             return true;
         }
 
         private bool isDraw()
         {
-            for (var i = 0; i < 2; i++)
+            for (var i = 0; i <= 2; i++)
             {
-                for (var j = 0; j < 2; j++)
+                for (var j = 0; j <= 2; j++)
                 {
                     if (isEmpty(i, j)) return false;
                 }
